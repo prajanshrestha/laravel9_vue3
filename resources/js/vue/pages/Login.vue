@@ -2,6 +2,8 @@
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-6 mt-4">
+            <h2 class="text-center">Login</h2>
+            <p v-if="error" class="text-danger">{{ error }}</p>
             <form @submit.prevent="login">
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -25,18 +27,23 @@ export default {
             form: {
                 email: "",
                 password: ""
-            }
+            },
+            error: ""
         }
     },
     methods: {
         login() {
-            let that = this;
             axios
                 .post("/api/login", {
-                    form: that.form
+                    form: this.form
                 })
                 .then((response) => {
-                    console.log(response);
+                    if(response.data.success) {
+                        localStorage.setItem("token", response.data.data.token);
+                        this.$router.push({ name: "Dashboard" });
+                    } else {
+                        this.error = response.data.message;
+                    }
                 })
         }
     }

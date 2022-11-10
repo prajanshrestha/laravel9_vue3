@@ -3,10 +3,13 @@
         <router-link class="navbar-brand" :to="{ name: 'Home' }">Home</router-link>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <router-link class="text-white text-decoration-none me-3" to="/register">Register</router-link>
+                <router-link class="text-white text-decoration-none" to="/register">Register</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="text-white text-decoration-none" to="/login">Login</router-link>
+                <router-link class="text-white text-decoration-none ms-3" to="/login">Login</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="text-white text-decoration-none ms-3" :to="{ name: 'Dashboard' }">Dashboard</router-link>
             </li>
         </ul>
     </nav>

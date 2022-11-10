@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
 use Auth;
-
+// password
 class AuthController extends Controller
 {
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->form, [
             "name" => "required",
             "email" => "required|email",
             "password" => "required",
@@ -25,7 +25,7 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $input = $request->all();
+        $input = $request->form;
         $input["password"] = bcrypt($input["password"]);
         $user = User::create($input);
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
-        if(Auth::attempt(["email" => $request->email, "password" => $request->password])) {
+        if(Auth::attempt(["email" => $request->form["email"], "password" => $request->form["password"]])) {
             $user = Auth::user();
             $success["token"] = $user->createToken("MyApp")->plainTextToken;
             $success["name"] = $user->name;
@@ -53,7 +53,7 @@ class AuthController extends Controller
         } else {
             return response()->json([
                 "success" => false,
-                "message" => "Unauthorized"
+                "message" => "Unauthorized, User cannot be logged in."
             ]);
         }
     }
