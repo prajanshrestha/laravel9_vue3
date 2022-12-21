@@ -40,6 +40,11 @@ export default {
                 .then((response) => {
                     if(response.data.success) {
                         localStorage.setItem("token", response.data.data.token);
+                        window.dispatchEvent(new CustomEvent('foo-key-localstorage-changed', {
+                            detail: {
+                                storage: localStorage.getItem('token')
+                            }
+                        }));
                         this.$router.push({ name: "Dashboard" });
                     } else {
                         this.error = response.data.message;

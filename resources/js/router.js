@@ -9,9 +9,9 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
-        meta: {
-            requiresAuth: false
-        }
+        // meta: {
+        //     requiresAuth: false
+        // }
     },
     {
         path: "/register",

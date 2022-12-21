@@ -10,6 +10,11 @@ export default {
     methods: {
         logout() {
             localStorage.removeItem("token");
+            window.dispatchEvent(new CustomEvent('foo-key-localstorage-changed', {
+                detail: {
+                    storage: ''
+                }
+            }));
             this.$router.push({ name: "Login" });
         }
     }
