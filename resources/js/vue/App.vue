@@ -19,22 +19,17 @@
 
 <script>
 export default {
-    data() {
-        return {
-            token: ""
-        }
-    },
     mounted() {
-        window.addEventListener('foo-key-localstorage-changed', (event) => {
-            console.log(event.detail.storage)
-            this.token = event.detail.storage;
-        });
+        // window.addEventListener('foo-key-localstorage-changed', (event) => {
+        //     console.log(event.detail.storage)
+        //     this.token = event.detail.storage;
+        // });
     },
     methods: {
 
     },
     computed: {
- getToken() {
+        getToken() {
             return this.token;
         }
     }
