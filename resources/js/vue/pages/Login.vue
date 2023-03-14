@@ -1,19 +1,26 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-        <div class="col-6 mt-4">
-            <h2 class="text-center">Login</h2>
-            <p v-if="error" class="text-danger">{{ error }}</p>
-            <form @submit.prevent="login">
+        <div class="col-6 mt-5">
+            <h3 class="text-center text-danger">Login</h3>
+            <form @submit.prevent="login" class="mt-2">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" v-model="form.email">
-                </div> <br>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" v-model="form.password">
-                </div> <br>
-                <button type="submit" class="btn btn-primary">Login</button>
+                    <h6 class="text-danger" for="email">Email Address</h6>
+                    <input type="email" id="email" class="form-control" v-model="form.email" style="margin-top: -5px;">
+                </div>
+                <div class="form-group mt-3">
+                    <h6 class="text-danger" for="password">Password</h6>
+                    <input type="password" id="password" class="form-control" v-model="form.password" style="margin-top: -5px;">
+                    <span v-if="error" class="text-danger" style="font-size: 12px;">{{ error }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-8 mt-3">
+                        <h6 class="text-danger f-size">Don't have an account? <span class="go-to-signup" @click="goToRegister">Sign Up</span></h6>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-danger bt-sm mt-2 float-end">Login</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -50,11 +57,20 @@ export default {
                         this.error = response.data.message;
                     }
                 })
+        },
+        goToRegister() {
+            this.$router.push({ name: 'Register' });
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+.f-size {
+    font-size: 12px;
+}
+.go-to-signup:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 </style>

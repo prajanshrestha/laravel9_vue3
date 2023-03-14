@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ps-5">
+    <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark ps-5">
         <router-link class="navbar-brand" :to="{ name: 'Home' }">Home</router-link>
         <ul class="navbar-nav">
             <li class="nav-item" v-if="!getToken">
@@ -12,7 +12,7 @@
                 <router-link class="text-white text-decoration-none ms-3" :to="{ name: 'Dashboard' }">Dashboard</router-link>
             </li>
         </ul>
-    </nav>
+    </nav> -->
 
     <router-view></router-view>
 </template>
@@ -37,5 +37,13 @@ export default {
 </script>
 
 <style>
-
+    body, html {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+    }
+    body {
+        background-color: #E0B2ED !important;
+    }
 </style>
