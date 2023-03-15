@@ -7,6 +7,11 @@
             <button @click="goToSignUp" class="btn btn-outline-danger bt-sm">Sign Up</button>
             <button @click="goToLogin" class="btn btn-outline-danger bt-sm ms-2">Log in</button>
         </div>
+
+        <!-- authentication using google -->
+        <div class="mt-2 d-flex justify-content-center">
+            <button class="btn btn-danger bt-sm" @click.prevent="loginWithGoogle">Sign In With Google</button>
+        </div>
     </div>
 </template>
 
@@ -18,6 +23,9 @@ export default {
         },
         goToLogin() {
             this.$router.push({ name: 'Login' });
+        },
+        loginWithGoogle() {
+            console.log('login with google');
         }
     }
 }

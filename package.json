@@ -14,9 +14,11 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^3.2.0",
         "bootstrap": "^5.2.2",
+        "google-auth-library": "^8.7.0",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.0",
         "vue-router": "^4.0.13",
+        "vue-social-auth": "^1.4.9",
         "vuex": "^4.1.0"
     }
 }
