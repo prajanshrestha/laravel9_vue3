@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-6 mt-5">
-            <h3 class="text-center">Login {{ getcount }} {{  $store.state.count }}</h3>
+            <!-- <h3 class="text-center">Login {{ getcount }} {{  $store.state.count }}</h3> -->
+            <h3 class="text-center">Login - {{  $store.state.count }}</h3>
             <form @submit.prevent="login" class="mt-2">
                 <div class="form-group">
                     <h6 class="" for="email">Email Address</h6>
@@ -28,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters,mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import store from "../../store/store"
 
 export default {
@@ -41,13 +42,14 @@ export default {
             error: ""
         }
     },
-    computed: mapGetters(["getcount"]),
+    // computed: mapGetters(["getcount"]),
 
     methods: {
-        ...mapActions(["login"]),
+        // ...mapActions(["login"]),
 
         login() {
-            store.dispatch('login')            // axios
+            store.dispatch('login')
+            // axios
             //     .post("/api/login", {
             //         form: this.form
             //     })
