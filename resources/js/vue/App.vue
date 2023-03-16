@@ -37,13 +37,4 @@ export default {
 </script>
 
 <style>
-    body, html {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        min-height: 100vh;
-    }
-    body {
-        background-color: #E0B2ED !important;
-    }
 </style>

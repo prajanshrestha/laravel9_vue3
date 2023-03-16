@@ -7,7 +7,9 @@ const store = createStore({
             { name: 'Shiny Star', price: 40 },
             { name: 'Green Shells', price: 60 },
             { name: 'Red Shells', price: 80 },
-        ]
+        ],
+        name: '',
+        count: 2
     },
     getters: {
         saleProducts: (state) => {
@@ -18,6 +20,14 @@ const store = createStore({
                 }
             });
             return saleProducts;
+        },
+        getcount: (state) => {
+            return state.count;
+        }
+    },
+    actions: {
+        login(context) {
+            context.commit('increment')
         }
     },
     mutations: {
@@ -25,6 +35,9 @@ const store = createStore({
             state.products.forEach((product) => {
                 product.price -= 1;
             });
+        },
+        increment(state) {
+            state.count++
         }
     }
 });
