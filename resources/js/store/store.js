@@ -50,6 +50,7 @@ const store = createStore({
         },
         login(state, form) {
             localStorage.setItem("token", form.token);
+            localStorage.setItem("username", form.name);
             state.username = form.name;
         },
         loginErrorMessage(state, payload) {

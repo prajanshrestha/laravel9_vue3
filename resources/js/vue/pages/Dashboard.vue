@@ -11,31 +11,12 @@
         <div class="card-head d-flex justify-content-between">
             <h5 style="padding: 12px;">Dashboard</h5>
             <div>
-                <span>Hey <b>{{ $store.state.username }}</b></span>
-                <button class="btn btn-primary btn-sm" @click="logout" style="margin: 10px;">Logout</button>
+                <span>Hey <b>{{ username }}</b></span>
+                <button class="btn btn-primary btn-sm" @click="goToDos" style="margin: 10px;">To Dos</button>
+                <button class="btn btn-primary btn-sm" @click="logout" style="margin: 5px 5px 5px 0px;">Logout</button>
             </div>
         </div>
-
     </div>
-
-
-    <!-- <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
-        <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
-    </div> -->
 </template>
 
 <script>
@@ -53,10 +34,13 @@ export default {
     },
     mounted() {
         let that = this;
+
+        that.getUsername();
     },
     methods: {
         logout() {
             localStorage.removeItem("token");
+            localStorage.removeItem("username");
             // window.dispatchEvent(new CustomEvent('foo-key-localstorage-changed', {
             //     detail: {
             //         storage: ''
@@ -68,6 +52,14 @@ export default {
             }
             this.$router.push({ name: "Login" });
         },
+        getUsername() {
+            let that = this;
+
+            that.username = localStorage.getItem('username');
+        },
+        goToDos() {
+            this.$router.push({ name: 'ToDo' });
+        }
     }
 }
 </script>

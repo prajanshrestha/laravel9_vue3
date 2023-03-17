@@ -3,6 +3,7 @@ import Home from "./vue/pages/Home.vue";
 import Register from "./vue/pages/Register.vue";
 import Login from "./vue/pages/Login.vue";
 import Dashboard from "./vue/pages/Dashboard.vue";
+import ToDo from './vue/pages/ToDoList/ToDo.vue';
 
 const routes = [
     {
@@ -30,6 +31,14 @@ const routes = [
         path: "/dashboard",
         name: "Dashboard",
         component: Dashboard,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/to-do",
+        name: "ToDo",
+        component: ToDo,
         meta: {
             requiresAuth: true
         }
