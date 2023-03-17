@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import router from '../router';
 
 const store = createStore({
     state: {
@@ -8,8 +9,8 @@ const store = createStore({
             { name: 'Green Shells', price: 60 },
             { name: 'Red Shells', price: 80 },
         ],
-        name: '',
-        count: 10
+        username: '',
+        error: '',
     },
     getters: {
         saleProducts: (state) => {
@@ -21,13 +22,24 @@ const store = createStore({
             });
             return saleProducts;
         },
-        getcount: (state) => {
-            return state.count;
-        }
+        // getcount: (state) => {
+        //     return state.count;
+        // }
     },
     actions: {
-        login(context) {
-            context.commit('increment')
+        login(context, payload) {
+        axios
+            .post("/api/login", {
+                form: payload
+            })
+            .then((response) => {
+                if(response.data.success) {
+                    context.commit('login', response.data.data);
+                    router.push({ name: 'Dashboard' });
+                } else {
+                    context.commit('loginErrorMessage', response.data.message);
+                }
+            })
         }
     },
     mutations: {
@@ -36,8 +48,12 @@ const store = createStore({
                 product.price -= 1;
             });
         },
-        increment(state) {
-            state.count++
+        login(state, form) {
+            localStorage.setItem("token", form.token);
+            state.username = form.name;
+        },
+        loginErrorMessage(state, payload) {
+            state.error = payload;
         }
     }
 });

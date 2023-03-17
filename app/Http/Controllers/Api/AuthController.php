@@ -57,8 +57,4 @@ class AuthController extends Controller
             ]);
         }
     }
-
-    public function getUserName(Request $request) {
-        dd('here');
-    }
 }

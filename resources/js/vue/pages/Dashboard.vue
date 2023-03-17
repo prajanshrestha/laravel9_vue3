@@ -11,7 +11,7 @@
         <div class="card-head d-flex justify-content-between">
             <h5 style="padding: 12px;">Dashboard</h5>
             <div>
-                <span>Hey <b>Prajan</b></span>
+                <span>Hey <b>{{ $store.state.username }}</b></span>
                 <button class="btn btn-primary btn-sm" @click="logout" style="margin: 10px;">Logout</button>
             </div>
         </div>
@@ -41,6 +41,7 @@
 <script>
 import ProductListOne from './ProductListOne.vue';
 import ProductListTwo from './ProductListTwo.vue';
+import store from '../../store/store';
 export default {
     components: {
         ProductListOne, ProductListTwo
@@ -52,8 +53,6 @@ export default {
     },
     mounted() {
         let that = this;
-
-        that.getUserName();
     },
     methods: {
         logout() {
@@ -63,17 +62,12 @@ export default {
             //         storage: ''
             //     }
             // }));
+            store.state.username = '';
+            if(store.state.error) {
+                store.state.error = '';
+            }
             this.$router.push({ name: "Login" });
         },
-        getUserName() {
-            let that = this;
-
-            axios
-                .get('/api/getUserName')
-                .then((response) => {
-                    console.log(response);
-                });
-        }
     }
 }
 </script>

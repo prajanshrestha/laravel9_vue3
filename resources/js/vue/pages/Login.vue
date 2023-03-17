@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-6 mt-5">
             <!-- <h3 class="text-center">Login {{ getcount }} {{  $store.state.count }}</h3> -->
-            <h3 class="text-center">Login - {{  $store.state.count }}</h3>
+            <h3 class="text-center">Login</h3>
             <form @submit.prevent="login" class="mt-2">
                 <div class="form-group">
                     <h6 class="" for="email">Email Address</h6>
@@ -12,7 +12,7 @@
                 <div class="form-group mt-3">
                     <h6 class="" for="password">Password</h6>
                     <input type="password" id="password" class="form-control" v-model="form.password" style="margin-top: -5px;">
-                    <span v-if="error" class="" style="font-size: 12px;">{{ error }}</span>
+                    <span v-if="$store.state.error" class="text-danger" style="font-size: 12px;">{{ $store.state.error }}</span>
                 </div>
                 <div class="row">
                     <div class="col-8 mt-3">
@@ -39,7 +39,6 @@ export default {
                 email: "",
                 password: ""
             },
-            error: ""
         }
     },
     // computed: mapGetters(["getcount"]),
@@ -48,24 +47,7 @@ export default {
         // ...mapActions(["login"]),
 
         login() {
-            store.dispatch('login')
-            // axios
-            //     .post("/api/login", {
-            //         form: this.form
-            //     })
-            //     .then((response) => {
-            //         if(response.data.success) {
-            //             localStorage.setItem("token", response.data.data.token);
-            //             // window.dispatchEvent(new CustomEvent('foo-key-localstorage-changed', {
-            //             //     detail: {
-            //             //         storage: localStorage.getItem('token')
-            //             //     }
-            //             // }));
-            //             this.$router.push({ name: "Dashboard" });
-            //         } else {
-            //             this.error = response.data.message;
-            //         }
-            //     })
+            store.dispatch('login', this.form);
         },
         goToRegister() {
             this.$router.push({ name: 'Register' });
