@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ToDoListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(AuthController::class)->group(function() {
     Route::post("/register", "register");
     Route::post("/login", "login");
+});
+
+// todo list
+Route::get('/toDoLists', [ToDoListController::class, 'index']);
+Route::prefix('/task')->group(function(){
+    Route::post('/store',[ToDoListController::class, 'store']);
+    Route::put('/{id}' , [ToDoListController::class, 'update']);
+    Route::delete('/{id}', [ToDoListController::class, 'destroy'] );
 });

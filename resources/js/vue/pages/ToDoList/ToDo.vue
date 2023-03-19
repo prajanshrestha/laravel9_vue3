@@ -1,21 +1,15 @@
 <template>
+    <page-header></page-header>
     <div class="container">
-        <h4 class="text-center mt-2">To Dos</h4>
-        <div class="row">
-            <div class="col-10 d-flex justify-content-center align-items-center mx-auto">
-                <input type="text" class="form-control form-control-sm">
-                <button class="btn btn-primary btn-sm ms-2">Add</button>
-            </div>
-        </div>
         <div class="row mt-5">
+            <div class="col-10 d-flex justify-content-center align-items-center mx-auto">
+                <input type="text" class="form-control form-control-sm" v-model="task_name" @keyup.enter="addTask">
+                <button class="btn btn-primary btn-sm ms-2" @click="addTask">Add</button>
+            </div>
+            <span class="text-danger text-center" v-if="task_name_empty_flag" style="font-size: 12px;;">To add, you must provide a task.</span>
+        </div>
+        <div class="row mt-2">
             <div class="col-8 d-flex justify-content-center align-items-center mx-auto">
-                <!-- <span>Take out the trash.</span>
-                <div class="ms-2">
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div> -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -23,12 +17,12 @@
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-for="(todo, index) in todos" :key="index">
                         <tr>
-                            <td>Take out the trash.</td>
+                            <td :style="{'background-color': white} ">{{ todo.tasks }}</td>
                             <td>
                                 <label class="switch">
-                                    <input type="checkbox" checked>
+                                    <input type="checkbox" :value="todo.id">
                                     <span class="slider round"></span>
                                 </label>
                             </td>
@@ -40,8 +34,51 @@
     </div>
 </template>
 <script>
+import PageHeader from '../../components/PageHeader.vue';
 export default {
+    components: {
+        PageHeader
+    },
+    data() {
+        return {
+            task_name: '',
+            task_name_empty_flag: false,
+            todos: [],
+            white: 'white'
+        }
+    },
+    mounted() {
+        let that = this;
 
+        that.getToDos();
+    },
+    methods: {
+        addTask() {
+            let that = this;
+
+            if(that.task_name == '') {
+                that.task_name_empty_flag = true;
+            } else {
+                axios
+                    .post('/api/task/store', {
+                        task_name: that.task_name
+                    })
+                    .then((response) => {
+                        that.task_name = '';
+                        that.getToDos();
+                    });
+            }
+        },
+        getToDos() {
+            let that = this;
+
+            axios
+                .get('/api/toDoLists')
+                .then((response) => {
+                    that.todos = response.data.tasks;
+                })
+        }
+    }
 }
 </script>
 <style scoped>
